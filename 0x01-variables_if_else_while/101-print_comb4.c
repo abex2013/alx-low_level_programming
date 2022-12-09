@@ -7,21 +7,21 @@
 int main(void)
 {
 	int ones = '0';
-	int tens = '0';
+	int te = '0';
 	int hundreds = '0';
 
 	for (hundreds = '0'; hundreds <= '9'; hundreds++)
 	{
-		for (tens = '0'; tens <= '9'; tens++)
+		for (te = '0'; te <= '9'; te++)
 		{
 			for (ones = '0'; ones <= '9'; ones++)
 			{
-				if (!((ones == tens) || (tens == hundreds) || (tens > ones) || (hundreds > tens)))
+				if (!((ones == te) || (te == hundreds) || (te > ones) || (hundreds > te)))
 				{
 					putchar(hundreds);
-					putchar(tens);
+					putchar(te);
 					putchar(ones);
-					if (!(ones == '9' && hundreds == '7' && tens == '8'))
+					if (!(ones == '9' && hundreds == '7' && te == '8'))
 					{
 						putchar(',');
 						putchar(' ');
