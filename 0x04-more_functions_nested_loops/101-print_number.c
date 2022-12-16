@@ -1,12 +1,12 @@
 #include "main.h"
 
 /**
- * print_number - print
+ * print_to_98 - print
  * @n: intiger
  * Return: always 0
  */
 
-void print_number(int n)
+void print_to_98(int n)
 {
 	unsigned int num = n;
 
@@ -16,6 +16,6 @@ void print_number(int n)
 		num = -num;
 	}
 	if ((num / 10) > 0)
-		print_number(num / 10);
+		print_to_98(num / 10);
 	_putchar((num % 10) + '0');
 }
