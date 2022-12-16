@@ -1,21 +1,25 @@
 #include "main.h"
 
 /**
- * print_to_98 - print
+ * print_number - print
  * @n: intiger
  * Return: always 0
  */
 
-void print_to_98(int n)
+void print_number(int n)
 {
-	unsigned int num = n;
+	unsigned int num;
 
 	if (n < 0)
 	{
 		_putchar('_');
-		num = -num;
+		num = -n;
 	}
-	if ((num / 10) > 0)
-		print_to_98(num / 10);
+	else
+	{
+		num = n;
+	}
+	if ((num / 10) != 0)
+		print_number(num / 10);
 	_putchar((num % 10) + '0');
 }
