@@ -8,26 +8,31 @@ include "lists.h"
  */
 listint_t *find_listint_loop(listint_t *head)
 {
-	listint_t *slow = head;
-	listint_t *fast = head;
+	listint_t *tortoise, *hare;
 
-	if (!head)
+	if (head == NULL || head->next == NULL)
 		return (NULL);
 
-	while (slow && fast && fast->next)
+	tortoise = head->next;
+	hare = (head->next)->next;
+
+	while (hare)
 	{
-		fast = fast->next->next;
-		slow = slow->next;
-		if (fast == slow)
+		if (tortoise == hare)
 		{
-			slow = head;
-			while (slow != fast)
+			tortoise = head;
+
+			while (tortoise != hare)
 			{
-				slow = slow->next;
-				fast = fast->next;
+				tortoise = tortoise->next;
+				hare = hare->next;
 			}
-			return (fast);
+
+			return (tortoise);
 		}
+
+		tortoise = tortoise->next;
+		hare = (hare->next)->next;
 	}
 
 	return (NULL);
