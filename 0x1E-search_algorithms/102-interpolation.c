@@ -1,52 +1,55 @@
 #include "search_algos.h"
-
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
 /**
- * interpolation_search - searches for a value in an array of
- * integers using the Interpolation search algorithm
- *
- * @array: input array
- * @size: size of the array
- * @value: value to search in
- * Return: index of the number
+ * interpolation_search - search a value in an array
+ * @array: pointer to the first element of the array
+ * @size: index of the left sidey
+ * @value: value to search for
+ * Return: index of the value or -1 if element not found
  */
+
 int interpolation_search(int *array, size_t size, int value)
 {
-	size_t pos, low, high;
-	double f;
+	size_t l;
+	size_t h;
+	size_t p;
 
-	if (array == NULL)
+	if (!array)
 		return (-1);
-
-	low = 0;
-	high = size - 1;
-
-	while (size)
+	l = 0;
+	h = size - 1;
+	while (array[l] <= value && array[h] >= value && l <= h)
 	{
-		f = (double)(high - low) / (array[high] - array[low]) * (value - array[low]);
-		pos = (size_t)(low + f);
-		printf("Value checked array[%d]", (int)pos);
-
-		if (pos >= size)
+		if (l == h)
 		{
-			printf(" is out of range\n");
-			break;
+			if (array[l] == value)
+			{
+				printf("Value checked array[%lu] = [%d]", l, array[l]);
+				return (l);
+			}
+			printf("Missing Edge Case !!!");
+			return (-1);
+		}
+		p = l + (((double)(h - l) / (array[h] - array[l])) * (value - array[l]));
+		if (array[p] == value)
+		{
+			printf("Value checked array[%lu] = [%d]\n", p, array[p]);
+			return (p);
+		}
+		if (array[p] < value)
+		{
+			printf("Value checked array[%lu] = [%d]\n", p, array[p]);
+			l = p + 1;
 		}
 		else
 		{
-			printf(" = [%d]\n", array[pos]);
+			printf("Value checked array[%lu] = [%d]\n", p, array[p]);
+			h = p - 1;
 		}
-
-		if (array[pos] == value)
-			return ((int)pos);
-
-		if (array[pos] < value)
-			low = pos + 1;
-		else
-			high = pos - 1;
-
-		if (low == high)
-			break;
 	}
-
+	p = l + (((double)(h - l) / (array[h] - array[l])) * (value - array[l]));
+	printf("Value checked array[%lu] is out of range\n", p);
 	return (-1);
 }
